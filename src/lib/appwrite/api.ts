@@ -1,5 +1,5 @@
 import { ID } from "appwrite";
-import {   INewUser } from "@/types";
+import {INewUser} from "@/types";
 import { account } from "./config";
 
 // ============================================================

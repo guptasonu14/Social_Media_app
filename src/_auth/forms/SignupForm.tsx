@@ -1,18 +1,28 @@
+import { z } from "zod";
+import { useForm } from "react-hook-form";
 
-import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import {Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage,} from "@/components/ui/form";
+
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import Loader from "@/components/shared/Loader";
 import { SignupValidation } from "@/lib/validation";
-import { z } from "zod";
- 
+import { createUserAccount } from "@/lib/appwrite/api";
 
- 
+
+
+
 const SignupForm = () => {
-  const isLoading  =  false;
+  const isLoading = false;
   // 1. Define your form.
   const form = useForm<z.infer<typeof SignupValidation>>({
     resolver: zodResolver(SignupValidation),
@@ -22,16 +32,15 @@ const SignupForm = () => {
       email: "",
       password: "",
     },
-  })
- 
+  });
+
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values)
+  async function onSubmit(values: z.infer<typeof SignupValidation>) {
+   const newUser = await createUserAccount(values);
+    console.log(newUser);
   }
   return (
-     <Form {...form}>
+    <Form {...form}>
       <div className="sm:w-420 flex-center flex-col">
         <img src="/assets/images/logo.svg" alt="logo" />
 
@@ -44,7 +53,8 @@ const SignupForm = () => {
 
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-5 w-full mt-4">
+          className="flex flex-col gap-5 w-full mt-4"
+        >
           <FormField
             control={form.control}
             name="name"
@@ -94,7 +104,12 @@ const SignupForm = () => {
               <FormItem>
                 <FormLabel className="shad-form_label">Password</FormLabel>
                 <FormControl>
-                  <Input type="password" className="shad-input" {...field} autoComplete="on" />
+                  <Input
+                    type="password"
+                    className="shad-input"
+                    {...field}
+                    autoComplete="on"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -104,7 +119,7 @@ const SignupForm = () => {
           <Button type="submit" className="shad-button_primary">
             {isLoading ? (
               <div className="flex-center gap-2">
-               <Loader/> Loading...
+                <Loader /> Loading...
               </div>
             ) : (
               "Sign Up"
@@ -114,15 +129,15 @@ const SignupForm = () => {
             Already have an account?
             <Link
               to="/sign-in"
-              className="text-primary-500 text-small-semibold ml-1">
+              className="text-primary-500 text-small-semibold ml-1"
+            >
               Log in
             </Link>
           </p>
-      </form>
+        </form>
       </div>
     </Form>
-    
-  )
-}
+  );
+};
 
-export default SignupForm
+export default SignupForm;
