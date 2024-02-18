@@ -15,6 +15,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Loader from "@/components/shared/Loader";
+import { useToast } from "@/components/ui/use-toast";
 import { SignupValidation } from "@/lib/validation";
 import { createUserAccount } from "@/lib/appwrite/api";
 
@@ -22,6 +23,7 @@ import { createUserAccount } from "@/lib/appwrite/api";
 
 
 const SignupForm = () => {
+  const { toast } = useToast();
   const isLoading = false;
   // 1. Define your form.
   const form = useForm<z.infer<typeof SignupValidation>>({
@@ -37,7 +39,17 @@ const SignupForm = () => {
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof SignupValidation>) {
    const newUser = await createUserAccount(values);
-    console.log(newUser);
+    
+   if (!newUser) {
+    toast({ title: "Sign up failed. Please try again.", });
+
+    // const session = await signInAccount({
+    //   email: user.email,
+    //   password: user.password,
+    // });
+    
+    return;
+  }
   }
   return (
     <Form {...form}>
@@ -141,3 +153,7 @@ const SignupForm = () => {
 };
 
 export default SignupForm;
+function toast(arg0: { title: string; }) {
+  throw new Error("Function not implemented.");
+}
+
