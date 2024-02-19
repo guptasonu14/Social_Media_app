@@ -1,7 +1,7 @@
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-//import { zodResolver } from "@hookform/resolvers/zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -30,6 +30,7 @@ const SignupForm = () => {
 
   // Queries
   const { mutateAsync: createUserAccount, isLoading: isCreatingAccount } = useCreateUserAccount();
+  
   const { mutateAsync: signInAccount, isLoading: isSigningInUser } = useSignInAccount();
 
   // Handler
