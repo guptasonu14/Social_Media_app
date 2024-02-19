@@ -22,10 +22,10 @@ const App = () => {
     <main className="flex h-screen">
       <Routes>
         {/* public routes */}
-        {/* <Route element={<AuthLayout />}>
+        {/* { <Route element={<AuthLayout />}>
           <Route path="/sign-in" element={<SigninForm />} />
           <Route path="/sign-up" element={<SignupForm />} />
-        </Route> */}
+        </Route> } */}
 
         {/* private routes */}
         <Route element={<RootLayout />}>
