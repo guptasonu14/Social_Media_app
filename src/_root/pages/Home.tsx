@@ -3,6 +3,7 @@ import { Models } from "appwrite";
 // import { useToast } from "@/components/ui/use-toast";
 import Loader from "@/components/shared/Loader";
 import { useGetRecentPosts, useGetUsers } from "@/lib/react-query/queries";
+import PostCard from "@/components/shared/PostCard";
 
 const Home = () => {
   // const { toast } = useToast();
