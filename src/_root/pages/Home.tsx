@@ -4,6 +4,7 @@ import { Models } from "appwrite";
 import Loader from "@/components/shared/Loader";
 import { useGetRecentPosts, useGetUsers } from "@/lib/react-query/queries";
 import PostCard from "@/components/shared/PostCard";
+import { Key } from "react";
 
 
 const Home = () => {
