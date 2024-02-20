@@ -4,8 +4,9 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 
-import { INewPost, INewUser, IUpdatePost, IUpdateUser } from "@/types";
+import { INewPost, INewUser, IUpdatePost,  } from "@/types";
 import { QUERY_KEYS } from "./queryKeys";
+import { createPost, createUserAccount, getRecentPosts, signInAccount, signOutAccount,} from "../appwrite/api";
 
 export const useCreateUserAccount = () => {
   return useMutation({
@@ -44,5 +45,27 @@ export const useGetRecentPosts = () => {
     queryFn: getRecentPosts,
   });
 };
+export const useGetUsers = (limit?: number) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_USERS],
+    queryFn: () => getUsers(limit),
+  });
+};
 
+export const UpdatePost = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (post: IUpdatePost) => UpdatePost(post),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_POST_BY_ID, data?.$id],
+      });
+    },
+  });
+};
+
+
+function getUsers(limit: number | undefined): any {
+  throw new Error("Function not implemented.");
+}
 
