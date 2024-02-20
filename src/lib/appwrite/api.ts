@@ -218,15 +218,3 @@ export async function getRecentPosts() {
     console.log(error);
   }
 }
-
-
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-
-  } catch (error) {
-    console.log(error);
-  }
-}
