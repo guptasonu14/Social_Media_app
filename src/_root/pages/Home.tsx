@@ -4,7 +4,7 @@ import { Models } from "appwrite";
 import Loader from "@/components/shared/Loader";
 import { useGetRecentPosts, useGetUsers } from "@/lib/react-query/queries";
 import PostCard from "@/components/shared/PostCard";
-import { Key } from "react";
+
 
 const Home = () => {
   // const { toast } = useToast();
@@ -44,7 +44,7 @@ const Home = () => {
             <ul className="flex flex-col flex-1 gap-9 w-full ">
               {posts?.documents.map((post: Models.Document) => (
                 <li key={post.$id} className="flex justify-center w-full">
-                  <PostCard post={post} key = {post.caption}/>
+
                 </li>
               ))}
             </ul>
