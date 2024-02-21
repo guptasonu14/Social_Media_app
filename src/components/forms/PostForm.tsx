@@ -32,8 +32,6 @@ const PostForm = ({ post, action }: PostFormProps) => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { user } = useUserContext();
-
-
   const form = useForm<z.infer<typeof PostValidation>>({
     resolver: zodResolver(PostValidation),
     defaultValues: {
@@ -53,7 +51,6 @@ const PostForm = ({ post, action }: PostFormProps) => {
   // Handler
   const handleSubmit = async (value: z.infer<typeof PostValidation>) => {
     // ACTION = UPDATE
-
     if (post && action === "Update") {
       const updatedPost = await updatePost({
         ...value,
