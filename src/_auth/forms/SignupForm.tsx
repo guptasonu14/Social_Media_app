@@ -116,19 +116,27 @@ const SignupForm = () => {
             )}
           />
 
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="shad-form_label">Email</FormLabel>
-                <FormControl>
-                  <Input type="text" className="shad-input" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+
+
+<FormField
+  control={form.control}
+  name="email"
+  render={({ field }) => (
+    <FormItem>
+      <FormLabel className="shad-form_label">Email</FormLabel>
+      <FormControl>
+        <Input
+          type="text"
+          className="shad-input"
+          placeholder="e.g., 12016459.sonu@lpu.in"
+          {...field}
+        />
+      </FormControl>
+      <FormMessage />
+    </FormItem>
+  )}
+/>
+
 
           <FormField
             control={form.control}
