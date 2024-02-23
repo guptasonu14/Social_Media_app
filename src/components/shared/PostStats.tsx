@@ -3,12 +3,10 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 import { checkIsLiked } from "@/lib/utils";
-import {
-  useLikePost,
-  useSavePost,
-  useDeleteSavedPost,
-  useGetCurrentUser,
-} from "@/lib/react-query/queries";
+import  useLikePost from "@/lib/react-query/queries";
+import  useSavePost from "@/lib/react-query/queries";
+import  useDeleteSavedPost from "@/lib/react-query/queries";
+import  useGetCurrentUser from "@/lib/react-query/queries";
 
 type PostStatsProps = {
   post: Models.Document;
