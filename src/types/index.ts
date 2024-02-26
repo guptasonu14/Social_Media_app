@@ -14,11 +14,13 @@ export type INavLink = {
   };
   
   export type INewPost = {
+    price: string;
     userId: string;
     caption: string;
     file: File[];
     location?: string;
     tags?: string;
+    
   };
   
   export type IUpdatePost = {
@@ -29,6 +31,15 @@ export type INavLink = {
     file: File[];
     location?: string;
     tags?: string;
+  };
+
+  export type IUpdateMarket = {
+    price: string;
+    postId: string;
+    imageId: string;
+    imageUrl: URL;
+    file: File[];
+    
   };
   
   export type IUser = {
@@ -46,3 +57,8 @@ export type INavLink = {
     username: string;
     password: string;
   };
+
+  
+    
+    
+  
