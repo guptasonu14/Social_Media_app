@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import  Loader  from "@/components/shared/Loader";
 //import { GridPostList, PostStats } from "@/components/shared";
 import GridPostList from "@/components/shared/GridPostList";
-import PostStats from "@/components/shared/PostStats";
+import MarketStats from "@/components/shared/MarketStats";
 
 import {
   useGetPostById,
@@ -124,7 +124,7 @@ const MarketDetails = () => {
             </div>
 
             <div className="w-full">
-              <PostStats post={post} userId={user.id} />
+              <MarketStats post={post} userId={user.id} />
             </div>
           </div>
         </div>

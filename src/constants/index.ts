@@ -26,8 +26,13 @@ export const sidebarLinks = [
     },
     {
       imgURL: "/assets/icons/market.svg",
-      route: "/create-market",
+      route: "/market",
       label: "Market",
+    },
+    {
+      imgURL: "/assets/icons/payment-method.svg",
+      route: "/create-market",
+      label: "Sell",
     },
   ];
   

@@ -1,8 +1,4 @@
 import { Models } from "appwrite";
-import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
-
-import { checkIsLiked } from "@/lib/utils";
 import { useGetCurrentUser } from "@/lib/react-query/queries";
 
 
