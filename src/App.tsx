@@ -16,16 +16,18 @@ import PostDetails from "./_root/pages/PostDetails";
 import Profile from "./_root/pages/Profile";
 import Saved from "./_root/pages/Saved";
 import UpdateProfile from "./_root/pages/UpdateProfile";
+import CreateMarket from "./_root/pages/CreateMarket";
+import Market from "./_root/pages/Market";
 
 const App = () => {
   return (
     <main className="flex h-screen">
       <Routes>
         {/* public routes */}
-        { <Route element={<AuthLayout />}>
+        <Route element={<AuthLayout />}>
           <Route path="/sign-in" element={<SigninForm />} />
           <Route path="/sign-up" element={<SignupForm />} />
-        </Route> }
+        </Route>
 
         {/* private routes */}
         <Route element={<RootLayout />}>
@@ -34,6 +36,8 @@ const App = () => {
           <Route path="/saved" element={<Saved />} />
           <Route path="/all-users" element={<AllUsers />} />
           <Route path="/create-post" element={<CreatePost />} />
+          <Route path="/market" element={<Market />} />
+          <Route path="/create-market" element={<CreateMarket />} />
           <Route path="/update-post/:id" element={<EditPost />} />
           <Route path="/posts/:id" element={<PostDetails />} />
           <Route path="/profile/:id/*" element={<Profile />} />

@@ -3,6 +3,7 @@ import {
   useMutation,
   useQueryClient,
   useInfiniteQuery,
+  UseMutationResult,
 } from "@tanstack/react-query";
 
 import { QUERY_KEYS } from "@/lib/react-query/queryKeys";
@@ -13,8 +14,10 @@ import {
   signOutAccount,
   getUsers,
   createPost,
+  createMarket,
   getPostById,
   updatePost,
+  updateMarket,
   getUserPosts,
   deletePost,
   likePost,
@@ -26,7 +29,8 @@ import {
   savePost,
   deleteSavedPost,
 } from "@/lib/appwrite/api";
-import { INewPost, INewUser, IUpdatePost, IUpdateUser } from "@/types";
+import { INewPost, INewUser, IUpdateMarket, IUpdatePost, IUpdateUser } from "@/types";
+import { Models } from "appwrite";
 
 // ============================================================
 // AUTH QUERIES
@@ -99,6 +103,18 @@ export const useCreatePost = () => {
   });
 };
 
+export const useCreateMarket = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (post: INewPost) => createMarket(post),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
+      });
+    },
+  });
+};
+
 export const useGetPostById = (postId?: string) => {
   return useQuery({
     queryKey: [QUERY_KEYS.GET_POST_BY_ID, postId],
@@ -126,6 +142,24 @@ export const useUpdatePost = () => {
     },
   });
 };
+
+export const useUpdateMarket = (): UseMutationResult<
+  Models.Document,
+  unknown,
+  IUpdateMarket,
+  unknown
+> => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (post: IUpdateMarket) => updateMarket(post),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_POST_BY_ID, data?.$id],
+      });
+    },
+  });
+};
+
 
 export const useDeletePost = () => {
   const queryClient = useQueryClient();
