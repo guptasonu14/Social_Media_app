@@ -18,8 +18,7 @@ export type INewPost = {
   userId: string;
   caption: string;
   file: File[];
-
-  tags?: string;
+  tags: string;
 };
 
 export type IUpdatePost = {

@@ -24,6 +24,7 @@ import {
   getUserById,
   updateUser,
   getRecentPosts,
+  getRecentMarket,
   getInfinitePosts,
   searchPosts,
   savePost,
@@ -88,6 +89,13 @@ export const useGetRecentPosts = () => {
   return useQuery({
     queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
     queryFn: getRecentPosts,
+  });
+};
+
+export const useGetRecentMarket = () => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_RECENT_MARKET],
+    queryFn: getRecentMarket, 
   });
 };
 

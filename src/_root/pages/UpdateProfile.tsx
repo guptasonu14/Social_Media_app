@@ -22,6 +22,7 @@ import Loader from "@/components/shared/Loader";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import Profile from "./Profile";
 
 const UpdateProfile = () => {
   const { toast } = useToast();
@@ -101,7 +102,7 @@ const UpdateProfile = () => {
               render={({ field }) => (
                 <FormItem className="flex">
                   <FormControl>
-                    <ProfileUploader
+                    <Profile
                       fieldChange={field.onChange}
                       mediaUrl={currentUser.imageUrl}
                     />

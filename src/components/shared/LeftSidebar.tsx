@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { useSignOutAccount } from "@/lib/react-query/queries";
 import { useUserContext, INITIAL_USER } from "@/context/AuthContext";
 import Loader from "./Loader";
+import '../../global.css'
 
 const LeftSidebar = () => {
   const navigate = useNavigate();
@@ -26,14 +27,14 @@ const LeftSidebar = () => {
   };
 
   return (
-    <nav className="leftsidebar">
-      <div className="flex flex-col gap-11">
+    <nav className="leftsidebar " >
+      <div className="flex flex-col gap-11 ">
         <Link to="/" className="flex gap-3 items-center">
           <img
-            src="/assets/images/logo.svg"
+            src="/assets/images/logo1.png"
             alt="logo"
-            width={170}
-            height={36}
+            width={135}
+            height={30}
           />
         </Link>
 
@@ -55,7 +56,7 @@ const LeftSidebar = () => {
           </Link>
         )}
 
-        <ul className="flex flex-col gap-3">
+        <ul className="flex flex-col gap-1">
           {sidebarLinks.map((link: INavLink) => {
             const isActive = pathname === link.route;
 
