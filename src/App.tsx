@@ -18,7 +18,7 @@ import Saved from "./_root/pages/Saved";
 import UpdateProfile from "./_root/pages/UpdateProfile";
 import CreateMarket from "./_root/pages/CreateMarket";
 import Market from "./_root/pages/Market";
-import Message from "./_root/pages/message";
+import Message from "./_root/pages/Message";
 
 
 

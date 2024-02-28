@@ -5,17 +5,17 @@ import { Link } from "react-router-dom";
 import { useUserContext } from "@/context/AuthContext";
 import MarketStats from "./MarketStats";
 
-type GridPostListProps = {
+type GridMarketListProps = {
   posts: Models.Document[];
   showUser?: boolean;
   showStats?: boolean;
 };
 
-const GridPostList = ({
+const GridMarketList = ({
   posts,
   showUser = true,
   showStats = true,
-}: GridPostListProps) => {
+}: GridMarketListProps) => {
   const { user } = useUserContext();
 
   return (
@@ -52,4 +52,4 @@ const GridPostList = ({
   );
 };
 
-export default GridPostList; 
+export default GridMarketList; 
