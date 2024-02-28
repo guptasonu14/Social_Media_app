@@ -597,17 +597,11 @@ export async function getRecentMarket() {
 
 // ============================== GET USERS
 export async function getUsers(limit?: number) {
-  const queries: any[] = [Query.orderDesc("$createdAt")];
-
-  if (limit) {
-    queries.push(Query.limit(limit));
-  }
-
   try {
     const users = await databases.listDocuments(
       appwriteConfig.databaseId,
       appwriteConfig.userCollectionId,
-      queries
+      [Query.orderDesc("$createdAt"), Query.limit(10)]
     );
 
     if (!users) throw Error;
@@ -617,6 +611,7 @@ export async function getUsers(limit?: number) {
     console.log(error);
   }
 }
+
 
 // ============================== GET USER BY ID
 export async function getUserById(userId: string) {
