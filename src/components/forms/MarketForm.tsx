@@ -22,12 +22,12 @@ import { useCreateMarket, useUpdateMarket } from "@/lib/react-query/queries";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
 
-type PostFormProps = {
+type MarketFormProps = {
   post?: Models.Document;
   action: "Create" | "Update";
 };
 
-const MarketForm = ({ post, action }: PostFormProps) => {
+const MarketForm = ({ post, action }: MarketFormProps) => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { user } = useUserContext();
@@ -80,10 +80,11 @@ const handleSubmit = async (value: z.infer<typeof MarketValidation>) => {
 
     // ACTION = CREATE
     const newPost = await createMarket({
-        ...value,
-        userId: user.id,
-        price: "",
-        caption: ""
+      ...value,
+      userId: user.id,
+      price: "",
+      caption: "",
+      tags: ""
     });
 
     if (!newPost) {
@@ -91,7 +92,7 @@ const handleSubmit = async (value: z.infer<typeof MarketValidation>) => {
         title: `${action} post failed. Please try again.`,
       });
     }
-    navigate("/");
+    navigate("/Market");
   };
 
   return (

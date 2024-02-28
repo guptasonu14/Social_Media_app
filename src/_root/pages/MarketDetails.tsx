@@ -2,8 +2,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
 import  Loader  from "@/components/shared/Loader";
-//import { GridPostList, PostStats } from "@/components/shared";
-import GridPostList from "@/components/shared/GridPostList";
+
 import MarketStats from "@/components/shared/MarketStats";
 
 import {
@@ -13,6 +12,7 @@ import {
 } from "@/lib/react-query/queries";
 import { multiFormatDateString } from "@/lib/utils";
 import { useUserContext } from "@/context/AuthContext";
+import GridMarketList from "@/components/shared/GridMarketList";
 
 const MarketDetails = () => {
   const navigate = useNavigate();
@@ -139,7 +139,7 @@ const MarketDetails = () => {
         {isUserPostLoading || !relatedPosts ? (
           <Loader />
         ) : (
-          <GridPostList posts={relatedPosts} />
+          <GridMarketList posts={relatedPosts} />
         )}
       </div>
     </div>

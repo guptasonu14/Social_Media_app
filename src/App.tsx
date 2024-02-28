@@ -18,6 +18,9 @@ import Saved from "./_root/pages/Saved";
 import UpdateProfile from "./_root/pages/UpdateProfile";
 import CreateMarket from "./_root/pages/CreateMarket";
 import Market from "./_root/pages/Market";
+import Message from "./_root/pages/message";
+
+
 
 const App = () => {
   return (
@@ -37,12 +40,15 @@ const App = () => {
           <Route path="/all-users" element={<AllUsers />} />
           <Route path="/create-post" element={<CreatePost />} />
           <Route path="/market" element={<Market />} />
+        
           <Route path="/create-market" element={<CreateMarket />} />
           <Route path="/update-post/:id" element={<EditPost />} />
           <Route path="/posts/:id" element={<PostDetails />} />
           <Route path="/profile/:id/*" element={<Profile />} />
           <Route path="/update-profile/:id" element={<UpdateProfile />} />
+          
         </Route>
+        <Route path="/message"  element={<Message /> }/>
       </Routes>
 
       <Toaster />
