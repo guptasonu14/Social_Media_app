@@ -20,7 +20,7 @@ const Home = () => {
     data: creators,
     isLoading: isUserLoading,
     isError: isErrorCreators,
-  } = useGetUsers(10);
+  } =useGetUsers(10);
 
   if (isErrorPosts || isErrorCreators) {
     return (
