@@ -4,6 +4,7 @@ import { appwriteConfig, account, databases, storage, avatars } from "./config";
 import {
   IUpdatePost,
   INewPost,
+  INewMarket,
   INewUser,
   IUpdateUser,
   IUpdateMarket,
@@ -154,7 +155,7 @@ export async function createPost(post: INewPost) {
       ID.unique(),
       {
         creator: post.userId,
-        price: post.price,
+       
         imageUrl: fileUrl,
         imageId: uploadedFile.$id,
       }
@@ -175,7 +176,7 @@ export async function createPost(post: INewPost) {
 
 
 // ============================== CREATE market
-export async function createMarket(post: INewPost) {
+export async function createMarket(post: INewMarket) {
   try {
     if (!post.file || !post.file[0]) {
       // Handle the case where 'file' is not provided
@@ -432,6 +433,7 @@ export async function updateMarket(post: IUpdateMarket) {
       appwriteConfig.postCollectionId,
       post.postId,
       {
+        caption: post.caption,
         price: post.price,
         imageUrl: image.imageUrl,
         imageId: image.imageId,

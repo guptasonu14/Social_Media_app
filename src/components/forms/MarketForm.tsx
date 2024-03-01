@@ -11,7 +11,6 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
- 
 } from "@/components/ui/form";
 import { MarketValidation } from "@/lib/validation";
 import { useToast } from "@/components/ui/use-toast";
@@ -35,23 +34,18 @@ const MarketForm = ({ post, action }: MarketFormProps) => {
   const form = useForm<z.infer<typeof MarketValidation>>({
     resolver: zodResolver(MarketValidation),
     defaultValues: {
-      
+      caption: post ? post?.caption : "",
       file: [],
       price: post ? post?.price : "",
-      
     },
   });
 
   // Query
- // Query
-const { mutateAsync: createMarket, isLoading: isLoadingCreate } = useCreateMarket();
+  const { mutateAsync: createMarket, isLoading: isLoadingCreate } = useCreateMarket();
 
-const { mutateAsync: updateMarket, isLoading: isLoadingUpdate } = useUpdateMarket();
+  const { mutateAsync: updateMarket, isLoading: isLoadingUpdate } = useUpdateMarket();
 
-  
-
-
-const handleSubmit = async (value: z.infer<typeof MarketValidation>) => {
+  const handleSubmit = async (value: z.infer<typeof MarketValidation>) => {
     // ACTION = UPDATE
     if (post && action === "Update") {
       try {
@@ -60,9 +54,9 @@ const handleSubmit = async (value: z.infer<typeof MarketValidation>) => {
           postId: post.$id,
           imageId: post.imageId,
           imageUrl: post.imageUrl,
-          price: "",
+          caption: ""
         });
-  
+
         if (!updatedMarket) {
           toast({
             title: `${action} post failed. Please try again.`,
@@ -82,9 +76,7 @@ const handleSubmit = async (value: z.infer<typeof MarketValidation>) => {
     const newPost = await createMarket({
       ...value,
       userId: user.id,
-      price: "",
-      caption: "",
-      tags: ""
+      caption: ""
     });
 
     if (!newPost) {
@@ -97,15 +89,15 @@ const handleSubmit = async (value: z.infer<typeof MarketValidation>) => {
 
   return (
     <Form {...form}>
-      <form
+        <form
         onSubmit={form.handleSubmit(handleSubmit)}
         className="flex flex-col gap-9 w-full  max-w-5xl">
         <FormField
           control={form.control}
-          name="price"
+          name="caption"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="shad-form_label">Price</FormLabel>
+              <FormLabel className="shad-form_label">Caption</FormLabel>
               <FormControl>
                 <Textarea
                   className="shad-textarea custom-scrollbar"
@@ -119,36 +111,42 @@ const handleSubmit = async (value: z.infer<typeof MarketValidation>) => {
 
         <FormField
           control={form.control}
-          name="file"
+          name="price"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="shad-form_label">Add Photos</FormLabel>
+              <FormLabel className="shad-form_label">Price</FormLabel>
               <FormControl>
-                <FileUploader
-                  fieldChange={field.onChange}
-                  mediaUrl={post?.imageUrl}
-                />
+                
+                <input type="number" className="shad-textarea custom-scrollbar" {...field} />
               </FormControl>
               <FormMessage className="shad-form_message" />
             </FormItem>
           )}
         />
 
-        
-
-      
+        <FormField
+          control={form.control}
+          name="file"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="shad-form_label">Add Photos</FormLabel>
+              <FormControl>
+                <FileUploader fieldChange={field.onChange} mediaUrl={post?.imageUrl} />
+              </FormControl>
+              <FormMessage className="shad-form_message" />
+            </FormItem>
+          )}
+        />
 
         <div className="flex gap-4 items-center justify-end">
-          <Button
-            type="button"
-            className="shad-button_dark_4"
-            onClick={() => navigate(-1)}>
+          <Button type="button" className="shad-button_dark_4" onClick={() => navigate(-1)}>
             Cancel
           </Button>
           <Button
             type="submit"
             className="shad-button_primary whitespace-nowrap"
-            disabled={isLoadingCreate || isLoadingUpdate}>
+            disabled={isLoadingCreate || isLoadingUpdate}
+          >
             {(isLoadingCreate || isLoadingUpdate) && <Loader />}
             {action} Post
           </Button>

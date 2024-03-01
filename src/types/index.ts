@@ -14,11 +14,17 @@ export type IUpdateUser = {
 };
 
 export type INewPost = {
-  price: string;
   userId: string;
   caption: string;
   file: File[];
   tags: string;
+};
+export type INewMarket = {
+  price: string;
+  userId: string;
+  caption: string;
+  file: File[];
+  
 };
 
 export type IUpdatePost = {
@@ -36,6 +42,7 @@ export type IUpdateMarket = {
   imageId: string;
   imageUrl: URL;
   file: File[];
+  caption: string;
 };
 
 export type IUser = {

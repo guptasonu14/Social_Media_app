@@ -1,7 +1,7 @@
 import { Models } from "appwrite";
 
 // import { useToast } from "@/components/ui/use-toast";
-//import { Loader, PostCard, UserCard } from "@/components/shared;
+
 
 import { useGetRecentMarket, useGetUsers } from "@/lib/react-query/queries";
 import Loader from "@/components/shared/Loader";
@@ -10,7 +10,7 @@ import UserCard from "@/components/shared/UserCard";
 import MarketCard from "@/components/shared/MarketCard";
 
 const Market = () => {
-  // const { toast } = useToast();
+ // const { toast } = useToast();
 
   const {
     data: posts,

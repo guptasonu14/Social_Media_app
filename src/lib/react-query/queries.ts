@@ -30,7 +30,7 @@ import {
   savePost,
   deleteSavedPost,
 } from "@/lib/appwrite/api";
-import { INewPost, INewUser, IUpdateMarket, IUpdatePost, IUpdateUser } from "@/types";
+import { INewMarket, INewPost, INewUser, IUpdateMarket, IUpdatePost, IUpdateUser } from "@/types";
 import { Models } from "appwrite";
 
 // ============================================================
@@ -114,7 +114,7 @@ export const useCreatePost = () => {
 export const useCreateMarket = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (post: INewPost) => createMarket(post),
+    mutationFn: (post: INewMarket) => createMarket(post),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
