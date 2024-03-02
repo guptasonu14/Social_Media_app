@@ -8,6 +8,7 @@ import SigninForm from "@/_auth/forms/SigninForm";
 import { Toaster } from "@/components/ui/toaster";
 
 import "./global.css";
+
 import AllUsers from "./_root/pages/AllUsers";
 import CreatePost from "./_root/pages/CreatePost";
 import Explore from "./_root/pages/Explore";
@@ -16,9 +17,12 @@ import PostDetails from "./_root/pages/PostDetails";
 import Profile from "./_root/pages/Profile";
 import Saved from "./_root/pages/Saved";
 import UpdateProfile from "./_root/pages/UpdateProfile";
-import CreateMarket from "./_root/pages/CreateMarket";
-import Market from "./_root/pages/Market";
-import Message from "./_root/pages/Message";
+import AllPostsBlog from "./_root/pages/AllPostsBlog";
+import AddBlog from "./_root/pages/AddBlog";
+import EditBlog from "./_root/pages/EditBlog";
+import Article from "./_root/pages/Article";
+import Post from "./_root/pages/Post";
+
 
 
 
@@ -39,16 +43,21 @@ const App = () => {
           <Route path="/saved" element={<Saved />} />
           <Route path="/all-users" element={<AllUsers />} />
           <Route path="/create-post" element={<CreatePost />} />
-          <Route path="/market" element={<Market />} />
-        
-          <Route path="/create-market" element={<CreateMarket />} />
           <Route path="/update-post/:id" element={<EditPost />} />
           <Route path="/posts/:id" element={<PostDetails />} />
           <Route path="/profile/:id/*" element={<Profile />} />
           <Route path="/update-profile/:id" element={<UpdateProfile />} />
-          
+
+          <Route path="/article" element={<Article />} />
+
+          <Route path="/all-blog" element={<AllPostsBlog />} />
+          <Route path="/add-blog" element={<AddBlog />} />
+          <Route path="/edit-blog" element={<EditBlog />} />
+          <Route path="/post/:slug" element={<Post />} />
+
+
         </Route>
-        <Route path="/message"  element={<Message /> }/>
+       
       </Routes>
 
       <Toaster />

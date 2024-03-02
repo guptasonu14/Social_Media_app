@@ -3,7 +3,7 @@ import {
   useMutation,
   useQueryClient,
   useInfiniteQuery,
-  UseMutationResult,
+  
 } from "@tanstack/react-query";
 
 import { QUERY_KEYS } from "@/lib/react-query/queryKeys";
@@ -14,24 +14,26 @@ import {
   signOutAccount,
   getUsers,
   createPost,
-  createMarket,
+ 
   getPostById,
   updatePost,
-  updateMarket,
+
   getUserPosts,
   deletePost,
   likePost,
   getUserById,
   updateUser,
   getRecentPosts,
-  getRecentMarket,
+  
   getInfinitePosts,
   searchPosts,
   savePost,
   deleteSavedPost,
+  
+
 } from "@/lib/appwrite/api";
-import { INewMarket, INewPost, INewUser, IUpdateMarket, IUpdatePost, IUpdateUser } from "@/types";
-import { Models } from "appwrite";
+import { INewPost, INewUser,  IUpdatePost, IUpdateUser, } from "@/types";
+
 
 // ============================================================
 // AUTH QUERIES
@@ -92,12 +94,6 @@ export const useGetRecentPosts = () => {
   });
 };
 
-export const useGetRecentMarket = () => {
-  return useQuery({
-    queryKey: [QUERY_KEYS.GET_RECENT_MARKET],
-    queryFn: getRecentMarket, 
-  });
-};
 
 export const useCreatePost = () => {
   const queryClient = useQueryClient();
@@ -111,17 +107,7 @@ export const useCreatePost = () => {
   });
 };
 
-export const useCreateMarket = () => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: (post: INewMarket) => createMarket(post),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
-      });
-    },
-  });
-};
+
 
 export const useGetPostById = (postId?: string) => {
   return useQuery({
@@ -151,22 +137,8 @@ export const useUpdatePost = () => {
   });
 };
 
-export const useUpdateMarket = (): UseMutationResult<
-  Models.Document,
-  unknown,
-  IUpdateMarket,
-  unknown
-> => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: (post: IUpdateMarket) => updateMarket(post),
-    onSuccess: (data) => {
-      queryClient.invalidateQueries({
-        queryKey: [QUERY_KEYS.GET_POST_BY_ID, data?.$id],
-      });
-    },
-  });
-};
+
+
 
 
 export const useDeletePost = () => {
@@ -286,3 +258,4 @@ export const useUpdateUser = () => {
     },
   });
 };
+

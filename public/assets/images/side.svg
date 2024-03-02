@@ -1,0 +1,15 @@
+<svg width="720" height="1024" viewBox="0 0 720 1024" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g clip-path="url(#clip0_1253_10571)">
+    <rect width="720" height="1024" fill="#09090A" />
+    <g clip-path="url(#clip1_1253_10571)">
+      <rect width="841.395" height="1472.08" transform="translate(90.6541 -208.339) rotate(11.2265)" fill="black" />
+      <g clip-path="url(#clip2_1253_10571)">
+        <rect x="214.241" y="690.863" width="508.433" height="256.733" rx="21.5742" transform="rotate(11.2265 214.241 690.863)" fill="#1B1B1F" />
+        <rect x="214.241" y="690.863" width="508.433" height="256.733" rx="21.5742" transform="rotate(11.2265 214.241 690.863)" fill="url(#pattern0)" />
+        <rect x="214.241" y="690.863" width="508.433" height="295.567" transform="rotate(11.2265 214.241 690.863)" fill="url(#paint0_linear_1253_10571)" fill-opacity="0.7" />
+
+        <image href="https://ik.imagekit.io/gupta/436574.jpg?updatedAt=1708406411764" width="17" height="36" />
+      </g>
+    </g>
+  </g>
+</svg>

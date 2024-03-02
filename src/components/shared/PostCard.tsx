@@ -16,8 +16,8 @@ const PostCard = ({ post }: PostCardProps) => {
   if (!post.creator) return;
 
   return (
-    <div className="post-card">
-      <div className="flex-between">
+    <div className="post-card bg-8-90-104">
+      <div className="flex-between ">
         <div className="flex items-center gap-3">
           <Link to={`/profile/${post.creator.$id}`}>
             <img
