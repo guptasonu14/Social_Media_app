@@ -17,12 +17,6 @@ import PostDetails from "./_root/pages/PostDetails";
 import Profile from "./_root/pages/Profile";
 import Saved from "./_root/pages/Saved";
 import UpdateProfile from "./_root/pages/UpdateProfile";
-import AllPostsBlog from "./_root/pages/AllPostsBlog";
-import AddBlog from "./_root/pages/AddBlog";
-import EditBlog from "./_root/pages/EditBlog";
-import Article from "./_root/pages/Article";
-import Post from "./_root/pages/Post";
-
 
 
 
@@ -48,12 +42,7 @@ const App = () => {
           <Route path="/profile/:id/*" element={<Profile />} />
           <Route path="/update-profile/:id" element={<UpdateProfile />} />
 
-          <Route path="/article" element={<Article />} />
-
-          <Route path="/all-blog" element={<AllPostsBlog />} />
-          <Route path="/add-blog" element={<AddBlog />} />
-          <Route path="/edit-blog" element={<EditBlog />} />
-          <Route path="/post/:slug" element={<Post />} />
+          
 
 
         </Route>
