@@ -1,25 +1,23 @@
+import React from "react";
 import { useUserContext } from "@/context/AuthContext";
 import { multiFormatDateString } from "@/lib/utils";
 import { Models } from "appwrite";
 import { Link } from "react-router-dom";
 import MarketStats from "./MarketStats";
 
-
-
 type PostCardProps = {
   post: Models.Document;
 };
 
-const MarketCard = ({ post }: PostCardProps) => {
+const MarketCard: React.FC<PostCardProps> = ({ post }) => {
   const { user } = useUserContext();
 
-  if (!post.creator) return;
-
+  if (!post.creator) return null; 
   return (
     <div className="post-card">
       <div className="flex-between">
         <div className="flex items-center gap-3">
-          <Link to={/profile/${post.creator.$id}}>
+          <Link to={`/profile/${post.creator.$id}`}>
             <img
               src={
                 post.creator?.imageUrl ||
@@ -35,17 +33,17 @@ const MarketCard = ({ post }: PostCardProps) => {
               {post.creator.name}
             </p>
             <div className="flex-center gap-2 text-light-3">
-              <p className="subtle-semibold lg:small-regular ">
+              <p className="subtle-semibold lg:small-regular">
                 {multiFormatDateString(post.$createdAt)}
               </p>
-              
             </div>
           </div>
         </div>
 
         <Link
-          to={/update-post/${post.$id}}
-          className={${user.id !== post.creator.$id && "hidden"}}>
+          to={`/update-post/${post.$id}`} // Fix: Added backticks and $ before id
+          className={`${user.id !== post.creator.$id && "hidden"}`}
+        >
           <img
             src={"/assets/icons/edit.svg"}
             alt="edit"
@@ -55,10 +53,9 @@ const MarketCard = ({ post }: PostCardProps) => {
         </Link>
       </div>
 
-      <Link to={/posts/${post.$id}}>
+      <Link to={`/posts/${post.$id}`}> {/* Fix: Added backticks and $ before id */}
         <div className="small-medium lg:base-medium py-5">
           <p>{post.price}</p>
-         
         </div>
 
         <img

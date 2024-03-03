@@ -1,5 +1,5 @@
 import { Models } from "appwrite";
-import { useNavigate } from "react-router-dom";
+
 
 type MarketStatsProps = {
   post: Models.Document;
@@ -7,11 +7,8 @@ type MarketStatsProps = {
 };
 
 const MarketStats = ({ post }: MarketStatsProps) => {
-  const navigate = useNavigate();
-
-  const handleButtonClick = () => {
-    navigate(/message);
-  };
+  
+ 
 
   return (
     <div className={`flex justify-between items-center z-20 `}>
@@ -27,7 +24,7 @@ const MarketStats = ({ post }: MarketStatsProps) => {
       </div>
 
       <div className="flex gap-2">
-        <button onClick={handleButtonClick}>message</button>
+        <button >message</button>
       </div>
     </div>
   );

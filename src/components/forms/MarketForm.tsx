@@ -125,6 +125,24 @@ type MarketFormProps = {
                 </FormItem>
               )}
             />
+
+<FormField
+          control={form.control}
+          name="price"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="shad-form_label">Price</FormLabel>
+              <FormControl>
+                <Textarea
+                  className="shad-textarea custom-scrollbar"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage className="shad-form_message" />
+            </FormItem>
+          )}
+        />
+
     
            <div className="flex gap-4 items-center justify-end">
               <Button
