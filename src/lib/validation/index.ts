@@ -41,3 +41,13 @@ export const PostValidation = z.object({
 });
 
 
+// ============================================================
+// Market POST
+// ============================================================
+export const MarketValidation = z.object({
+  caption: z.string().min(5, { message: "Minimum 5 characters." }).max(2200, { message: "Maximum 2,200 caracters" }), 
+  file: z.custom<File[]>(),
+  price: z.string().min(5, { message: "Minimum 5 characters." }).max(2200, { message: "Maximum 2,200 caracters" }),
+ 
+ 
+});

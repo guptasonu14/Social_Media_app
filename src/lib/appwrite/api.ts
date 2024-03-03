@@ -1,13 +1,13 @@
-import { ID, Query, } from "appwrite";
+import { ID, Query } from "appwrite";
 
 import { appwriteConfig, account, databases, storage, avatars } from "./config";
-
 import {
   IUpdatePost,
   INewPost,
   INewUser,
   IUpdateUser,
-  
+  IUpdateMarket,
+  INewMarket,
 } from "@/types";
 
 // ============================================================
@@ -129,7 +129,7 @@ export async function createPost(post: INewPost) {
   try {
     if (!post.file || !post.file[0]) {
       // Handle the case where 'file' is not provided
-      console.log("No file provided");
+      console.log('No file provided');
       // Continue with the rest of the function logic or return early if needed
       return;
     }
@@ -138,14 +138,14 @@ export async function createPost(post: INewPost) {
     const uploadedFile = await uploadFile(post.file[0]);
 
     if (!uploadedFile) {
-      throw new Error("Failed to upload file.");
+      throw new Error('Failed to upload file.');
     }
 
     // Get file url
     const fileUrl = getFilePreview(uploadedFile.$id);
     if (!fileUrl) {
       await deleteFile(uploadedFile.$id);
-      throw new Error("Failed to get file URL.");
+      throw new Error('Failed to get file URL.');
     }
 
     // Create post
@@ -155,7 +155,7 @@ export async function createPost(post: INewPost) {
       ID.unique(),
       {
         creator: post.userId,
-
+        
         imageUrl: fileUrl,
         imageId: uploadedFile.$id,
       }
@@ -163,7 +163,7 @@ export async function createPost(post: INewPost) {
 
     if (!newPost) {
       await deleteFile(uploadedFile.$id);
-      throw new Error("Failed to create post.");
+      throw new Error('Failed to create post.');
     }
 
     return newPost;
@@ -175,6 +175,55 @@ export async function createPost(post: INewPost) {
 }
 
 
+// ============================== CREATE market
+export async function createMarket(post: INewMarket) {
+  try {
+    if (!post.file || !post.file[0]) {
+      // Handle the case where 'file' is not provided
+      console.log('No file provided');
+      // Continue with the rest of the function logic or return early if needed
+      return;
+    }
+
+    // Upload file to appwrite storage
+    const uploadedFile = await uploadFile(post.file[0]);
+
+    if (!uploadedFile) {
+      throw new Error('Failed to upload file.');
+    }
+
+    // Get file url
+    const fileUrl = getFilePreview(uploadedFile.$id);
+    if (!fileUrl) {
+      await deleteFile(uploadedFile.$id);
+      throw new Error('Failed to get file URL.');
+    }
+
+    // Create post
+    const newPost = await databases.createDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.postCollectionId,
+      ID.unique(),
+      {
+        creator: post.userId,
+        price: post.price,
+        imageUrl: fileUrl,
+        imageId: uploadedFile.$id,
+      }
+    );
+
+    if (!newPost) {
+      await deleteFile(uploadedFile.$id);
+      throw new Error('Failed to create post.');
+    }
+
+    return newPost;
+  } catch (error) {
+    console.log(error);
+    // Handle errors or rethrow them if necessary
+    throw error;
+  }
+}
 
 // ============================== UPLOAD FILE
 export async function uploadFile(file: File) {
@@ -190,8 +239,6 @@ export async function uploadFile(file: File) {
     console.log(error);
   }
 }
-
-
 
 // ============================== GET FILE URL
 export function getFilePreview(fileId: string) {
@@ -351,6 +398,71 @@ export async function updatePost(post: IUpdatePost) {
 
 
 
+// ============================== UPDATE market
+export async function updateMarket(post: IUpdateMarket) {
+  const hasFileToUpdate = post.file && post.file.length > 0;
+
+  try {
+    let image = {
+      imageUrl: post.imageUrl,
+      imageId: post.imageId,
+    };
+
+    if (hasFileToUpdate) {
+      // Upload new file to appwrite storage
+      const uploadedFile = await uploadFile(post.file[0]);
+
+      if (!uploadedFile) {
+        throw new Error("Failed to upload file");
+      }
+
+      // Get new file url
+      const fileUrl = getFilePreview(uploadedFile.$id);
+
+      if (!fileUrl) {
+        await deleteFile(uploadedFile.$id);
+        throw new Error("Failed to get file preview URL");
+      }
+
+      image = { ...image, imageUrl: fileUrl, imageId: uploadedFile.$id };
+    }
+
+    // Update post
+    const updateMarket = await databases.updateDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.postCollectionId,
+      post.postId,
+      {
+        price: post.price,
+        imageUrl: image.imageUrl,
+        imageId: image.imageId,
+        caption: post.caption,
+      }
+    );
+
+    // Failed to update
+    if (!updateMarket) {
+      // Delete new file that has been recently uploaded
+      if (hasFileToUpdate) {
+        await deleteFile(image.imageId);
+      }
+
+      throw new Error("Failed to update document");
+    }
+
+    // Safely delete old file after successful update
+    if (hasFileToUpdate) {
+      await deleteFile(post.imageId);
+    }
+
+    return updateMarket;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+
 // ============================== DELETE POST
 export async function deletePost(postId?: string, imageId?: string) {
   if (!postId || !imageId) return;
@@ -465,7 +577,21 @@ export async function getRecentPosts() {
   }
 }
 
+export async function getRecentMarket() {
+  try {
+    const posts = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.postCollectionId,
+      [Query.orderDesc("$createdAt"), Query.limit(20)]
+    );
 
+    if (!posts) throw Error;
+
+    return posts;
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 // ============================================================
 // USER
@@ -487,6 +613,7 @@ export async function getUsers(_limit?: number) {
     console.log(error);
   }
 }
+
 
 // ============================== GET USER BY ID
 export async function getUserById(userId: string) {
@@ -562,4 +689,3 @@ export async function updateUser(user: IUpdateUser) {
     console.log(error);
   }
 }
-
