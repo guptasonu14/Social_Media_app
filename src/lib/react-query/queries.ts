@@ -27,6 +27,8 @@ import {
   getRecentMarket,
   getInfinitePosts,
   searchPosts,
+  getSavedPosts,
+   
   savePost,
   deleteSavedPost,
 } from "@/lib/appwrite/api";
@@ -269,6 +271,12 @@ export const useGetUserById = (userId: string) => {
     queryKey: [QUERY_KEYS.GET_USER_BY_ID, userId],
     queryFn: () => getUserById(userId),
     enabled: !!userId,
+  });
+};
+export const useGetSavedPosts = () => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
+    queryFn: getSavedPosts,
   });
 };
 
